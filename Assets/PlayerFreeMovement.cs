@@ -39,22 +39,18 @@ public class PlayerFreeMovement : MonoBehaviour
 
     void Move()
     {
+        //movement
+        _movement.Normalize();
+        Vector2 direction = _movement * (_moveSpeed * Time.fixedDeltaTime);
+
+        _rb.MovePosition(_rb.position + direction);
+        
         //rotation
         float angle = Mathf.Atan2(_movement.y, _movement.x) * Mathf.Rad2Deg - 90;
         Vector3 newRotation = transform.rotation.eulerAngles;
         newRotation.z = angle;
 
         transform.rotation = Quaternion.Euler(newRotation);
-
-        //movement
-        float signOfAngle = Mathf.Sign(angle);
-        _movement.Normalize();
-        Vector2 direction = transform.up * signOfAngle * _movement.y;
-
-        _rb.MovePosition(_rb.position + direction * (_moveSpeed * Time.fixedDeltaTime));
-        
-
-        //transform.up = direction;
 
 
     }
