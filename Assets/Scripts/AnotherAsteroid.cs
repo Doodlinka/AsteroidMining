@@ -6,10 +6,10 @@ public class AnotherAsteroid : MonoBehaviour, IDamageable
 {
     //references
     private Rigidbody2D _rb;
-
+    [SerializeField]private AnotherAsteroid _asteroidPrefab;
 
     //fields
-    private float _size = 1;
+    [Range(0,10)]private float _size = 1;
     private int _maxHealth, _health;
     private float Size { //this size also serves as the maxHealth
         get => _size;
@@ -28,10 +28,17 @@ public class AnotherAsteroid : MonoBehaviour, IDamageable
         // TODO: unhardcode sizes and speed
         // TODO: unhardcode sizes, speed and health
         // a lot of things that are here should be refactor with how you will instantiate another asteroid prefabs in mind
-        Size = Random.Range(1f, 2.25f);
-        _velocity = Random.insideUnitCircle.normalized * Random.Range(3.3f, 8f);
+        Init();
+    }
+
+    public void Init()
+    {
+        Size = Random.Range(0.5f, 2f);
+
+        _velocity = Random.insideUnitCircle.normalized * Random.Range(2f, 5f);
         _rb.velocity = _velocity;
-        _maxHealth = (int)Size * 2;
+
+        _maxHealth = (int)Size;
         _health = _maxHealth;
     }
 
@@ -39,20 +46,28 @@ public class AnotherAsteroid : MonoBehaviour, IDamageable
     {
         if(_health <= 0)return;
         _health -= damage;
+        ReduceSize();
+
         if(_health <= 0)
         {
             Die();
         }
     }
 
-    public void Die() {
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
+
+    void ReduceSize()
+    {
         if (Size > 1) {
             Size--;
 
-            Destroy(gameObject);
-        }
-        else {
-            Destroy(gameObject);
+            Instantiate(gameObject);
+        }else
+        {
+            Die();        
         }
     }
 
