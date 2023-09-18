@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3852995089981949342}
   - component: {fileID: 3852995089981949343}
   - component: {fileID: 3852995089981949340}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Asteroid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f5213fd59c25cdc47aa710073d36ad35, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
