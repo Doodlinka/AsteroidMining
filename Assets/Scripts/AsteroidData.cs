@@ -10,12 +10,14 @@ public class AsteroidData
     [Range(0,10)]private float _size = 1f;
     public int MaxHealth = 2, Health;
     private int _divisions = Random.Range(2,4);
+    private float _speedMultiplier = Random.Range(1.5f,5f);
     private Vector2 _velocity = Vector2.zero;
 
     //properties
     public int DivisionsCount => _divisions;
     public Rigidbody2D rigidbody => _rb;
     public Vector3 position => _asteroidTransform.position;
+    public float Speed => _speedMultiplier;
     public Vector2 Velocity
     {
         get => _velocity;

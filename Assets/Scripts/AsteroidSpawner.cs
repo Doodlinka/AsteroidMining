@@ -27,9 +27,9 @@ public class AsteroidSpawner : MonoBehaviour
 
     void SetStartingAsteroidValues()
     {
-        float size = Random.Range(1.5f, 4.5f);
+        float size = Random.Range(1f, 4f);
         int maxHealth = Random.Range(2, 4);
-        Vector2 velocity = Random.insideUnitCircle.normalized * Random.Range(2.5f, 4.5f);
+        Vector2 velocity = Random.insideUnitCircle.normalized * Random.Range(2.5f, 5f);
         _initialValues = new(size, maxHealth, null, velocity);
 
     }
@@ -61,13 +61,13 @@ public class AsteroidSpawner : MonoBehaviour
         asteroidData.Health = _initialValues.Health;
         asteroidData.Size = _initialValues.Size;
         asteroidData.Velocity = _initialValues.Velocity;
-
         if(!asteroid.Value.SubscribedToEvent)
         {
             //checking the event subscription with a boolean is so ugly it hurts
             asteroid.Value.SubscribedToEvent = true;
             asteroid.Value.onSplit += CreateCopy;
         }
+       
         _alreadySpawnedTest = true;
     }
 
@@ -79,15 +79,29 @@ public class AsteroidSpawner : MonoBehaviour
         {
             KeyValuePair<GameObject, AnotherAsteroid> asteroid = _pool.GetObjectAnyway();
             if(asteroid.Key == null || asteroid.Value == null) return;
-            asteroid.Key.transform.position = data.position;
 
+            //gameobject things
+            asteroid.Key.SetActive(true);
+            asteroid.Key.transform.position = (Vector2)data.position + Random.insideUnitCircle * (Random.Range(1.5f, 3.5f) * data.Size);
+
+            //asteroid script things
             int oppositeDirection = (i % 2 == 0) ? 1 : -1; //im going to use this integer so i can make each asteroid division "bounce" in oppositeDirections
             var asteroidData = asteroid.Value.data;
-            asteroidData.Velocity = data.Velocity * Vector2.right * oppositeDirection;
+            asteroidData.MaxHealth = _initialValues.MaxHealth;
             asteroidData.Health = _initialValues.MaxHealth; //here im resetting the health but i dont know if its okay
             asteroidData.Size = _initialValues.Size;
+            Vector2 randomSpreadVelocity = new Vector2(Random.Range(-0.25f,0.25f), Random.Range(-0.25f,0.25f));
+            asteroidData.Velocity = (data.Velocity + randomSpreadVelocity).normalized * data.Speed; //you can make the asteroids lose velocity here
+
+            //THIS BLOCK CAUSES THE ASTEROIDS TO SPAWN INFINETLY
+            /*if(!asteroid.Value.SubscribedToEvent)
+            {
+                //checking the event subscription with a boolean is so ugly it hurts
+                asteroid.Value.SubscribedToEvent = true;
+                asteroid.Value.onSplit += CreateCopy;
+            }*/
 
         }
-
     }
+
 }

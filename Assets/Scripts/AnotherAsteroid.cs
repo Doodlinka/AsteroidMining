@@ -20,7 +20,7 @@ public class AnotherAsteroid : MonoBehaviour, IDamageable
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _data = new(1, 1, _rb, Vector2.zero);
+        _data = new(1, 2, _rb, Vector2.zero);
 
     }
 
@@ -37,11 +37,11 @@ public class AnotherAsteroid : MonoBehaviour, IDamageable
 
     public void Die()
     {
-        if(_data.Size > 1)
+        if(_data.Size > 1.25f)
         {
             _data.Size--;
-            onSplit.Invoke(_data);
-            //gameObject.SetActive(false);
+            onSplit?.Invoke(_data);
+            gameObject.SetActive(false);
         }else
         {
             gameObject.SetActive(false);
@@ -57,8 +57,8 @@ public class AnotherAsteroid : MonoBehaviour, IDamageable
             damageable.TakeDamage(1);
         }
 
-        Vector2 directionToBounce = _data.Velocity - (Vector2)otherGO.transform.position + (-_data.Velocity/2);
-        _data.Velocity = directionToBounce;
+        Vector2 directionToBounce = _data.Velocity - (Vector2)otherGO.transform.position;
+        _data.Velocity = directionToBounce.normalized * _data.Speed;
         TakeDamage(1);
         //the lines above change the data of the asteroid (making it smaller, and slower? or at least changing its velocity to the opposite direction)
 
