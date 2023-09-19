@@ -1,62 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerFreeMovement : MonoBehaviour
 {
 
-    //references
-    Rigidbody2D _rb;
+    [SerializeField]
+    private float _moveSpeed = 1;
+    [SerializeField]
+    private float _rotationSpeed = 1;
 
-    //fields
-    [SerializeField]private float _moveSpeed = 1;
-    [SerializeField]private float _rotationSpeed = 1;
-    Vector2 _movement;
+    private Vector2 _movement;
+    private Rigidbody2D _rb;
 
-    private void Awake() {
+    private void Awake() 
+    {
         if(_rb == null) _rb = GetComponent<Rigidbody2D>();
     }
 
-    
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         _movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        
     }
 
-    private void FixedUpdate() 
+    private void FixedUpdate()
     {
-        if(_movement.sqrMagnitude > 0.1f)
-        {
-            Move();
-        }else
-        {
-            Iddle();
-        }
+        Move();
+        RotateShip();
     }
 
-    void Move()
+    private void RotateShip()
     {
-        //movement
-        _movement.Normalize();
-        Vector2 direction = _movement * (_moveSpeed * Time.fixedDeltaTime);
-        _rb.AddForce(_rb.position + direction, ForceMode2D.Force);
-        //_rb.MovePosition(_rb.position + direction);
-        
-        //rotation
-        float angle = Mathf.Atan2(_movement.y, _movement.x) * Mathf.Rad2Deg - 90;
-        Vector3 newRotation = transform.rotation.eulerAngles;
-        newRotation.z = angle;
-
-        transform.rotation = Quaternion.Euler(newRotation);
-
-
+        var rotationAmount = _movement.x * _rotationSpeed * Time.deltaTime;
+        _rb.rotation -= rotationAmount;
     }
 
-    void Iddle()
+    private void Move()
     {
-
+        Vector2 direction = transform.up * _movement.y;
+        _rb.AddForce(direction * _moveSpeed, ForceMode2D.Force);
     }
 }
