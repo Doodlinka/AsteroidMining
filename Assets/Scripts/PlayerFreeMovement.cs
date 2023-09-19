@@ -42,8 +42,8 @@ public class PlayerFreeMovement : MonoBehaviour
         //movement
         _movement.Normalize();
         Vector2 direction = _movement * (_moveSpeed * Time.fixedDeltaTime);
-
-        _rb.MovePosition(_rb.position + direction);
+        _rb.AddForce(_rb.position + direction, ForceMode2D.Force);
+        //_rb.MovePosition(_rb.position + direction);
         
         //rotation
         float angle = Mathf.Atan2(_movement.y, _movement.x) * Mathf.Rad2Deg - 90;
