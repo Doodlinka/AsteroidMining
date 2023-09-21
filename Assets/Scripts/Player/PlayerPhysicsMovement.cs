@@ -2,9 +2,7 @@ using UnityEngine;
 
 public class PlayerPhysicsMovement : MonoBehaviour
 {
-    [SerializeField] private float thrust = 1, rotationSpeed = 1, bulletImpulse = 1, maxVelocity = 1;
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private Transform shootPoint;
+    [SerializeField] private float thrust = 1, rotationSpeed = 1, maxVelocity = 1;
 
     private Vector2 movement;
     private Rigidbody2D rb2d;
@@ -17,7 +15,7 @@ public class PlayerPhysicsMovement : MonoBehaviour
     private void Update()
     {
         movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        if (Input.GetButtonUp("Fire1")) Shoot();
+        
     }
 
     private void FixedUpdate() {
@@ -25,10 +23,7 @@ public class PlayerPhysicsMovement : MonoBehaviour
         Rotate();
     }
 
-    private Quaternion CalculateRotation() {
-        var rotationAngle = Mathf.Atan2(transform.up.y, transform.up.x) * Mathf.Rad2Deg;
-        return Quaternion.Euler(0, 0, rotationAngle);
-    }
+
 
     private void Move() {
         if (movement.y < 0) {
@@ -51,10 +46,5 @@ public class PlayerPhysicsMovement : MonoBehaviour
         }
     }
 
-    private void Shoot() {
-        var rotation = CalculateRotation();
-        GameObject b = Instantiate(bulletPrefab, shootPoint.position, rotation);
-        b.GetComponent<FatBullet>().Fire(transform.up, bulletImpulse, 1);
-        rb2d.AddForce(-transform.up * bulletImpulse, ForceMode2D.Impulse);
-    }
+    
 }
