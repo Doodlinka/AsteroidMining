@@ -2,12 +2,11 @@ using UnityEngine;
 
 public class LimitedLifetime : MonoBehaviour
 {
-    [SerializeField] private float lifetime = 1;
+    [SerializeField] private float lifetime;
 
     void Start()
     {
         Destroy(gameObject, lifetime);
-        GetComponent<Animation>().Play();
     }
 
 }
