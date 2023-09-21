@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 366385160, guid: f6d7cc84b49719546bc370c44340d37a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,6 +99,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c07688eb03e0f4a967cee8bb85003e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 366385160, guid: f6d7cc84b49719546bc370c44340d37a, type: 3}
+  - {fileID: 1653636241, guid: f6d7cc84b49719546bc370c44340d37a, type: 3}
+  - {fileID: -618779247, guid: f6d7cc84b49719546bc370c44340d37a, type: 3}
+  oreSprites:
+  - {fileID: -1518697870, guid: f6d7cc84b49719546bc370c44340d37a, type: 3}
+  - {fileID: -1150953499, guid: f6d7cc84b49719546bc370c44340d37a, type: 3}
+  - {fileID: -1181750621, guid: f6d7cc84b49719546bc370c44340d37a, type: 3}
 --- !u!50 &3852995089981949343
 Rigidbody2D:
   serializedVersion: 4
@@ -119,7 +127,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!58 &3852995089981949340
 CircleCollider2D:
   m_ObjectHideFlags: 0

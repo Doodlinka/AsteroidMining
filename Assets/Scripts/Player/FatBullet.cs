@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class FatBullet : MonoBehaviour
 {
-    [SerializeField] private float lifetime = 5f;
+    // [SerializeField] private float lifetime = 5f;
     private int damage = 1;
     private Rigidbody2D rb2d;
     
-    private void Awake() {
+    private void Start() {
         rb2d = GetComponent<Rigidbody2D>();
-        Destroy(gameObject, lifetime);
+        // Destroy(gameObject, lifetime);
     }
 
     public void Fire(Vector2 dir, float vel, int dmg) {
