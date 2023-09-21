@@ -31,6 +31,7 @@ public class Asteroid : MonoBehaviour, IDamageable
     }
 
     public void Die() {
+        // TODO: explosion animation
         if (Size > 1) {
             Size--;
             // TODO: change velocity on split and maybe shift the init burden on the spawner

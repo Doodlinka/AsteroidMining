@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1468660566}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.56, z: 0}
+  m_LocalPosition: {x: 0, y: 0.185, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -146,12 +146,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4546009716761118132}
-  - component: {fileID: 4546009716761118129}
+  - component: {fileID: -7221321643839988886}
   - component: {fileID: 4546009716761118134}
   - component: {fileID: 4546009716761118135}
   - component: {fileID: 768456290}
   m_Layer: 7
-  m_Name: Player
+  m_Name: PhysicsPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -174,7 +174,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4546009716761118129
+--- !u!114 &-7221321643839988886
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -183,12 +183,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4546009716761118133}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4555e16550fa87647a43f8411bd5ff95, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d512f8a331d04d46acb8fdcdbff9818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 60
-  rotationSpeed: 180
-  bulletPrefab: {fileID: 3596262600655397399, guid: 182943b3b10f3a044b0273b3a0bcf741, type: 3}
+  thrust: 10
+  rotationSpeed: 360
+  bulletImpulse: 4
+  maxVelocity: 10
+  bulletPrefab: {fileID: 3596262600655397399, guid: 2a25f7643811da245a04a37d1273c0cb, type: 3}
   shootPoint: {fileID: 1468660567}
 --- !u!50 &4546009716761118134
 Rigidbody2D:
@@ -202,15 +204,15 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 4
-  m_AngularDrag: 0.05
+  m_Mass: 1.5
+  m_LinearDrag: 0
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!61 &4546009716761118135
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -224,7 +226,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.009857476, y: 0.15615928}
+  m_Offset: {x: 0, y: 0.2}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -235,7 +237,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3099748, y: 0.47946906}
+  m_Size: {x: 0.25, y: 0.45}
   m_EdgeRadius: 0
 --- !u!61 &768456290
 BoxCollider2D:
@@ -250,7 +252,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00011485815, y: -0.18687432}
+  m_Offset: {x: 0, y: -0.18}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -261,5 +263,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8085928, y: 0.31991133}
+  m_Size: {x: 0.8, y: 0.3}
   m_EdgeRadius: 0
