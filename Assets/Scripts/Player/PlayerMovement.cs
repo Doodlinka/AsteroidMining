@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerPhysicsMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float thrust = 1, rotationSpeed = 1, maxVelocity = 1;
 

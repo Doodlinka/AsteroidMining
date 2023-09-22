@@ -31,7 +31,7 @@ public class AsteroidSpawner : MonoBehaviour
         Vector3 randomTarget = RandomPosInsideRect(bottomLeft, topRight);
         Vector2 velocity = (randomTarget - position).normalized * Random.Range(_velocityMin, _velocityMax);
 
-        AsteroidData data = new(Random.Range(1, 3), position, velocity, Random.value <= _oreChance);
+        AsteroidData data = new(Random.Range(1, 4), position, velocity, Random.value <= _oreChance);
         Asteroid rock =  MakeAsteroid(data);
 
         // if (!asteroid.Value.SubscribedToEvent ){

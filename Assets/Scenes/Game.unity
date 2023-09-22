@@ -317,8 +317,8 @@ MonoBehaviour:
   m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
+  m_SubmitButton: A
+  m_CancelButton: B
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
@@ -577,19 +577,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 323817179401020348, guid: 206eb3d2aa15aff40a791c606fb1bf57, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0
+      value: 0.28897673
       objectReference: {fileID: 0}
     - target: {fileID: 323817179401020348, guid: 206eb3d2aa15aff40a791c606fb1bf57, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0
+      value: 0.051813472
       objectReference: {fileID: 0}
     - target: {fileID: 323817179401020348, guid: 206eb3d2aa15aff40a791c606fb1bf57, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 1
+      value: 0.42160738
       objectReference: {fileID: 0}
     - target: {fileID: 323817179401020348, guid: 206eb3d2aa15aff40a791c606fb1bf57, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 1
+      value: 0.8953368
       objectReference: {fileID: 0}
     - target: {fileID: 323817179401020350, guid: 206eb3d2aa15aff40a791c606fb1bf57, type: 3}
       propertyPath: m_Name
