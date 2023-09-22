@@ -15,15 +15,12 @@ public class PlayerPhysicsMovement : MonoBehaviour
     private void Update()
     {
         movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        
     }
 
     private void FixedUpdate() {
         Move();
         Rotate();
     }
-
-
 
     private void Move() {
         if (movement.y < 0) {
@@ -38,12 +35,6 @@ public class PlayerPhysicsMovement : MonoBehaviour
 
     private void Rotate() {
         rb2d.rotation -= movement.x * rotationSpeed * Time.fixedDeltaTime;
-        if (movement.x == 0) {
-            rb2d.angularVelocity = Mathf.MoveTowards(rb2d.angularVelocity, 0, rotationSpeed * 2 * Time.fixedDeltaTime);
-        }
-        else {
-            rb2d.angularVelocity -= movement.x * rotationSpeed * Time.fixedDeltaTime;
-        }
     }
 
     
