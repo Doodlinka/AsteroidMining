@@ -1,107 +1,72 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AsteroidPooler))]
+// [RequireComponent(typeof(AsteroidPooler))]
 public class AsteroidSpawner : MonoBehaviour
 {
-    [SerializeField]Transform[] _spawnPoints;
-    [SerializeField]AsteroidPooler _pool;
-    AsteroidData _initialValues;
+    // [SerializeField] private AsteroidPooler _pool;
+    [SerializeField] private GameObject _asteroidPrefab;
 
-    [SerializeField]float _spawnCooldown = 0.5f;
-    float _nextSpawnTime;
+    [SerializeField] float _spawnCooldownMin = 0.5f, _spawnCooldownMax = 2f, _velocityMin = 2f, 
+            _velocityMax = 6f, _spawnPosMargin = 3f, _oreChance = 0.25f;
+    float _spawnTimer;
 
-    bool _alreadySpawnedTest = false;
+    private void Start() {
+        _spawnTimer = Random.Range(_spawnCooldownMin, _spawnCooldownMax);
+        // _pool = GetComponent<AsteroidPooler>();
+    }
 
-    private void Awake() {
-        _nextSpawnTime = _spawnCooldown;
-        _pool = GetComponent<AsteroidPooler>();
-
-        if(_initialValues == null)
-        {
-            SetStartingAsteroidValues();
+    void FixedUpdate()
+    {
+        _spawnTimer -= Time.fixedDeltaTime;
+        if (_spawnTimer <= 0) {
+            _spawnTimer += Random.Range(_spawnCooldownMin, _spawnCooldownMax);
+            Spawn();
         }
-        
     }
 
-    void SetStartingAsteroidValues()
-    {
-        float size = Random.Range(1f, 4f);
-        int maxHealth = Random.Range(2, 4);
-        Vector2 velocity = Random.insideUnitCircle.normalized * Random.Range(2.5f, 5f);
-        _initialValues = new(size, maxHealth, null, velocity);
+    private void Spawn() {
+        var bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, Camera.main.farClipPlane));
+        var topRight = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.farClipPlane));
+        Vector3 position = RandomPosOutsideRect(bottomLeft, topRight);
+        Vector3 randomTarget = RandomPosInsideRect(bottomLeft, topRight);
+        Vector2 velocity = (randomTarget - position).normalized * Random.Range(_velocityMin, _velocityMax);
 
-    }
+        AsteroidData data = new(Random.Range(1, 3), position, velocity, Random.value <= _oreChance);
+        Asteroid rock =  MakeAsteroid(data);
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //this is just for testing, im gonna use a timer in the update method
-        InvokeRepeating("Spawn", 1, _spawnCooldown);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void Spawn()
-    {
-        if(_alreadySpawnedTest)return; 
-        //so we are going to assign the createCopy method to each asteroid
-        KeyValuePair<GameObject, AnotherAsteroid> asteroid = _pool.GetPooledObject();
-        if(asteroid.Key == null || asteroid.Value == null) return;
-
-        asteroid.Key.transform.position = _spawnPoints[Random.Range(0, _spawnPoints.Length)].position;
-
-        var asteroidData = asteroid.Value.data;
-        asteroidData.MaxHealth = _initialValues.MaxHealth;
-        asteroidData.Health = _initialValues.Health;
-        asteroidData.Size = _initialValues.Size;
-        asteroidData.Velocity = _initialValues.Velocity;
-        if(!asteroid.Value.SubscribedToEvent)
-        {
+        // if (!asteroid.Value.SubscribedToEvent ){
             //checking the event subscription with a boolean is so ugly it hurts
-            asteroid.Value.SubscribedToEvent = true;
-            asteroid.Value.onSplit += CreateCopy;
-        }
+            // asteroid.Value.SubscribedToEvent = true;
+        rock.onSplit += CreateCopy;
+        // }
        
-        _alreadySpawnedTest = true;
     }
 
-    void CreateCopy(AsteroidData data)
-    {
-        Debug.Log("Creating " + data.DivisionsCount + " copies of asteroids");
-        //here you should do a for loop with the number of divisions of the data
-        for(int i = 0; i < data.DivisionsCount; i++)
-        {
-            KeyValuePair<GameObject, AnotherAsteroid> asteroid = _pool.GetObjectAnyway();
-            if(asteroid.Key == null || asteroid.Value == null) return;
-
-            //gameobject things
-            asteroid.Key.SetActive(true);
-            asteroid.Key.transform.position = (Vector2)data.position + Random.insideUnitCircle * (Random.Range(1.5f, 3.5f) * data.Size);
-
-            //asteroid script things
-            int oppositeDirection = (i % 2 == 0) ? 1 : -1; //im going to use this integer so i can make each asteroid division "bounce" in oppositeDirections
-            var asteroidData = asteroid.Value.data;
-            asteroidData.MaxHealth = _initialValues.MaxHealth;
-            asteroidData.Health = _initialValues.MaxHealth; //here im resetting the health but i dont know if its okay
-            asteroidData.Size = _initialValues.Size;
-            Vector2 randomSpreadVelocity = new Vector2(Random.Range(-0.25f,0.25f), Random.Range(-0.25f,0.25f));
-            asteroidData.Velocity = (data.Velocity + randomSpreadVelocity).normalized * data.Speed; //you can make the asteroids lose velocity here
-
-            //THIS BLOCK CAUSES THE ASTEROIDS TO SPAWN INFINETLY
-            /*if(!asteroid.Value.SubscribedToEvent)
-            {
-                //checking the event subscription with a boolean is so ugly it hurts
-                asteroid.Value.SubscribedToEvent = true;
-                asteroid.Value.onSplit += CreateCopy;
-            }*/
-
-        }
+    private void CreateCopy(AsteroidData data) {
+        // when an ore rock splits, the first piece is guaranteed to have ore
+        // and handles it itself, the second one is twice as likely as the spawn ore chance
+        data.HasOre &= Random.value <= 2 * _oreChance;
+        MakeAsteroid(data);
     }
 
+    private Vector3 RandomPosOutsideRect(Vector3 bottomLeft, Vector3 topRight) {
+        var randomValue = Random.value;
+        if (randomValue < 0.25f) return new (bottomLeft.x - _spawnPosMargin, Random.Range(bottomLeft.y, topRight.y), 0);
+        else if (randomValue < 0.5f) return new (Random.Range(bottomLeft.x, topRight.x), topRight.y + _spawnPosMargin, 0);
+        else if (randomValue < 0.75f) return new (topRight.x + _spawnPosMargin, Random.Range(bottomLeft.y, topRight.y), 0);
+        else return new (Random.Range(bottomLeft.x, topRight.x), bottomLeft.y - _spawnPosMargin, 0);
+    }
+
+    private Vector3 RandomPosInsideRect(Vector3 bottomLeft, Vector3 topRight) {
+        float x = Random.Range(bottomLeft.x + _spawnPosMargin, topRight.x - _spawnPosMargin);
+        float y = Random.Range(bottomLeft.y + _spawnPosMargin, topRight.y - _spawnPosMargin);
+        return new (x, y, 0);
+    }
+
+    private Asteroid MakeAsteroid(AsteroidData data) {
+        // insert pool request here if we use a pool
+        Asteroid rock = Instantiate(_asteroidPrefab).GetComponent<Asteroid>();
+        rock.Init(data);
+        return rock;
+    }
 }

@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Asteroid : MonoBehaviour, IDamageable
 {
@@ -8,30 +10,43 @@ public class Asteroid : MonoBehaviour, IDamageable
     private SpriteRenderer sr;
     private CircleCollider2D coll;
 
-    private int size = 1, health;
-    private int Size {
-        get => size;
-        set {
-            size = value;
-            // transform.localScale = new Vector3(size, size, 1);
-            if (rb2d != null) {
-                rb2d.mass = size;
-            }
-            if (coll != null) {
-                coll.radius = size / 2f;
-            }
-            health = size;
+    private AsteroidData _data;
+    public AsteroidData Data {
+        get {
+            _data.Position = transform.position;
+            _data.Velocity = rb2d?.velocity ?? Vector2.zero;
+            return _data;
         }
     }
-    private bool hasOre;
-    public bool HasOre => hasOre;
+    public int Size {
+        get => _data.Size;
+        private set {
+            _data.Size = value;
+            if (rb2d == null) rb2d = GetComponent<Rigidbody2D>();
+            if (coll == null) coll = GetComponent<CircleCollider2D>();
+            rb2d.mass = _data.Size;
+            coll.radius = _data.Size / 2f;
+            health = _data.Size;
+            SetSprite();
+        }
+    }
+    public bool HasOre  {
+        get => _data.HasOre;
+        private set {
+            _data.HasOre = value;
+            SetSprite();
+        }
+    }
+    private int health;
+
+    public event Action<AsteroidData> onSplit;
+    // [HideInInspector]public bool SubscribedToEvent = false;
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         coll = GetComponent<CircleCollider2D>();
-        Init(Random.Range(1, 4), Random.insideUnitCircle.normalized * Random.Range(2f, 8f), Random.value >= 0.75);
     }
 
     public void TakeDamage(int damage = 1) {
@@ -45,10 +60,7 @@ public class Asteroid : MonoBehaviour, IDamageable
         // TODO: explosion animation
         if (Size > 1) {
             Size--;
-            // TODO: change velocity on split and maybe shift the init burden on the spawner
-            Instantiate(gameObject).GetComponent<Asteroid>().Init(Size - 1, rb2d.velocity, hasOre);
-            hasOre = Random.value >= 0.75;
-            SetSprite();
+            onSplit?.Invoke(_data);
         }
         else {
             Vanish();
@@ -57,31 +69,41 @@ public class Asteroid : MonoBehaviour, IDamageable
 
     // used to silently despawn
     // this won't give any animation or score, Die handles that
-    // needs to be handled in the pooler, maybe entirely
     public void Vanish() {
+        // return to the pool if we keep it
         Destroy(gameObject);
     }
 
-    public void Init(int _size, Vector2 velocity, bool ore) {
-        Size = _size;
-        rb2d.velocity = velocity;
-        hasOre = ore;
-        SetSprite();
+    public void Init(AsteroidData data) {
+        Size = data.Size;
+        transform.position = data.Position;
+        rb2d.velocity = data.Velocity;
+        HasOre = data.HasOre;
     }
 
     private void SetSprite() {
-        if (sr == null) return;
-        if (hasOre) {
-            sr.sprite = oreSprites[size - 1];
+        if (sr == null) sr = GetComponent<SpriteRenderer>();
+        if (HasOre) {
+            sr.sprite = oreSprites[Size - 1];
         }
         else {
-            sr.sprite = sprites[size - 1];
+            sr.sprite = sprites[Size - 1];
         }
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.TryGetComponent<IDamageable>(out IDamageable d)) {
-            d.TakeDamage(size);
+            d.TakeDamage(Size);
         }
     }
+
+    // private void OnDisable() {
+    //     // return to the pool if we keep it
+    //     // Vanish()?
+    // }
+
+    // private void OnDestroy() {
+    //     // return to the pool if we keep it
+    //     // Vanish()?
+    // }
 }
