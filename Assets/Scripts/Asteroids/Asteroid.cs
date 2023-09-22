@@ -43,7 +43,8 @@ public class Asteroid : MonoBehaviour, IDamageable
     public event Action<AsteroidData> onSplit;
     // [HideInInspector]public bool SubscribedToEvent = false;
 
-    void Start()
+    void 
+    Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();

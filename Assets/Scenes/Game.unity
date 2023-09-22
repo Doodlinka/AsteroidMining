@@ -191,6 +191,18 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6622712274732575165, guid: e23ee5785d01e894c8a429bc6a396dd6, type: 3}
+      propertyPath: beamColor.b
+      value: 0.8392157
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622712274732575165, guid: e23ee5785d01e894c8a429bc6a396dd6, type: 3}
+      propertyPath: beamColor.g
+      value: 0.99607843
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622712274732575165, guid: e23ee5785d01e894c8a429bc6a396dd6, type: 3}
+      propertyPath: beamColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622712274732575165, guid: e23ee5785d01e894c8a429bc6a396dd6, type: 3}
       propertyPath: bulletImpulse
       value: 8
       objectReference: {fileID: 0}

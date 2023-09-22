@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
     private int damage = 1;
     private Rigidbody2D rb2d;
     
-    private void Start() {
+    private void Awake() {
         rb2d = GetComponent<Rigidbody2D>();
         // Destroy(gameObject, lifetime);
     }
