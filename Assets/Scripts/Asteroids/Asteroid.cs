@@ -10,6 +10,7 @@ public class Asteroid : MonoBehaviour, IDamageable
     private SpriteRenderer sr;
     private CircleCollider2D coll;
 
+    // DONT'T GET THE BACKER
     private AsteroidData _data;
     public AsteroidData Data {
         get {
@@ -60,7 +61,7 @@ public class Asteroid : MonoBehaviour, IDamageable
         // TODO: explosion animation
         if (Size > 1) {
             Size--;
-            onSplit?.Invoke(_data);
+            onSplit?.Invoke(Data);
         }
         else {
             Vanish();

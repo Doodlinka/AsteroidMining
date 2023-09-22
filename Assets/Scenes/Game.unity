@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7221321643839988886, guid: e23ee5785d01e894c8a429bc6a396dd6, type: 3}
+      propertyPath: rotationSpeed
+      value: 360
+      objectReference: {fileID: 0}
     - target: {fileID: 4546009716761118132, guid: e23ee5785d01e894c8a429bc6a396dd6, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -177,6 +181,14 @@ PrefabInstance:
     - target: {fileID: 4546009716761118133, guid: e23ee5785d01e894c8a429bc6a396dd6, type: 3}
       propertyPath: m_Name
       value: PhysicsPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4546009716761118134, guid: e23ee5785d01e894c8a429bc6a396dd6, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4546009716761118134, guid: e23ee5785d01e894c8a429bc6a396dd6, type: 3}
+      propertyPath: m_Constraints
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6622712274732575165, guid: e23ee5785d01e894c8a429bc6a396dd6, type: 3}
       propertyPath: bulletImpulse
@@ -382,7 +394,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 503263560}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90c18a1059785aa49942b7fcb7163830, type: 3}
   m_Name: 
@@ -417,10 +429,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _asteroidPrefab: {fileID: 3852995089981949331, guid: e5d0de356dcc3cb47a1c13b8878d99bd, type: 3}
-  _spawnCooldownMin: 0.5
+  _spawnCooldownMin: 1
   _spawnCooldownMax: 2
-  _velocityMin: 2
-  _velocityMax: 6
+  _velocityMin: 4
+  _velocityMax: 8
   _spawnPosMargin: 3
   _oreChance: 0.25
 --- !u!1 &1695830312
@@ -577,19 +589,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 323817179401020348, guid: 206eb3d2aa15aff40a791c606fb1bf57, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0.28897673
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 323817179401020348, guid: 206eb3d2aa15aff40a791c606fb1bf57, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0.051813472
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 323817179401020348, guid: 206eb3d2aa15aff40a791c606fb1bf57, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.42160738
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 323817179401020348, guid: 206eb3d2aa15aff40a791c606fb1bf57, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 0.8953368
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 323817179401020350, guid: 206eb3d2aa15aff40a791c606fb1bf57, type: 3}
       propertyPath: m_Name

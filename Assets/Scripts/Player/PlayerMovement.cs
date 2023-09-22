@@ -18,24 +18,15 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        Move();
-        Rotate();
-    }
-
-    private void Move() {
         if (movement.y < 0) {
             rb2d.velocity = Vector2.MoveTowards(rb2d.velocity, Vector2.zero, thrust * Time.fixedDeltaTime);
-            rb2d.angularVelocity = Mathf.MoveTowards(rb2d.angularVelocity, 0, rotationSpeed * Time.fixedDeltaTime);
+            // rb2d.angularVelocity = Mathf.MoveTowards(rb2d.angularVelocity, 0, rotationSpeed * Time.fixedDeltaTime);
         }
         else {
             rb2d.AddForce(transform.up * movement.y * thrust);
             rb2d.velocity = Vector2.ClampMagnitude(rb2d.velocity, maxVelocity);
         }
-    }
 
-    private void Rotate() {
         rb2d.rotation -= movement.x * rotationSpeed * Time.fixedDeltaTime;
     }
-
-    
 }

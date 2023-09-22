@@ -21,15 +21,14 @@ public class PlayerShooting : MonoBehaviour
 
     private void Shoot()
     {
-        var rotation = CalculateRotation();
-        GameObject b = Instantiate(bulletPrefab, shootPoint.position, rotation);
+        GameObject b = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
         b.GetComponent<Bullet>().Fire(transform.up, bulletImpulse, 1);
         rb.AddForce(-transform.up * bulletImpulse, ForceMode2D.Impulse);
     }
 
-    private Quaternion CalculateRotation() 
-    {
-        var rotationAngle = Mathf.Atan2(transform.up.y, transform.up.x) * Mathf.Rad2Deg;
-        return Quaternion.Euler(0, 0, rotationAngle);
-    }
+    // private Quaternion CalculateRotation() 
+    // {
+    //     var rotationAngle = Mathf.Atan2(transform.up.y, transform.up.x) * Mathf.Rad2Deg;
+    //     return Quaternion.Euler(0, 0, rotationAngle);
+    // }
 }

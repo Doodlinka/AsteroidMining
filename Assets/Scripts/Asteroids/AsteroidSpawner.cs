@@ -25,19 +25,19 @@ public class AsteroidSpawner : MonoBehaviour
     }
 
     private void Spawn() {
-        var bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, Camera.main.farClipPlane));
-        var topRight = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.farClipPlane));
+        Vector3 camQuarter = new(Camera.main.orthographicSize * Camera.main.aspect, Camera.main.orthographicSize);
+        Vector3 bottomLeft = transform.position - camQuarter;
+        Vector3 topRight = transform.position + camQuarter;
         Vector3 position = RandomPosOutsideRect(bottomLeft, topRight);
         Vector3 randomTarget = RandomPosInsideRect(bottomLeft, topRight);
         Vector2 velocity = (randomTarget - position).normalized * Random.Range(_velocityMin, _velocityMax);
 
         AsteroidData data = new(Random.Range(1, 4), position, velocity, Random.value <= _oreChance);
-        Asteroid rock =  MakeAsteroid(data);
+        MakeAsteroid(data);
 
         // if (!asteroid.Value.SubscribedToEvent ){
             //checking the event subscription with a boolean is so ugly it hurts
             // asteroid.Value.SubscribedToEvent = true;
-        rock.onSplit += CreateCopy;
         // }
        
     }
@@ -67,6 +67,7 @@ public class AsteroidSpawner : MonoBehaviour
         // insert pool request here if we use a pool
         Asteroid rock = Instantiate(_asteroidPrefab).GetComponent<Asteroid>();
         rock.Init(data);
+        rock.onSplit += CreateCopy;
         return rock;
     }
 }
