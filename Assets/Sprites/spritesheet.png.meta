@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spritesheet_0
+      name: bigrock
       rect:
         serializedVersion: 2
         x: 0
@@ -138,7 +138,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_1
+      name: bigore
       rect:
         serializedVersion: 2
         x: 24
@@ -159,7 +159,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_2
+      name: midrock
       rect:
         serializedVersion: 2
         x: 48
@@ -180,7 +180,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_3
+      name: midore
       rect:
         serializedVersion: 2
         x: 48
@@ -222,7 +222,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_5
+      name: smallrock
       rect:
         serializedVersion: 2
         x: 0
@@ -243,7 +243,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_6
+      name: smallore
       rect:
         serializedVersion: 2
         x: 8
@@ -411,7 +411,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_14
+      name: bullet
       rect:
         serializedVersion: 2
         x: 10
@@ -432,7 +432,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_15
+      name: ship
       rect:
         serializedVersion: 2
         x: 0
@@ -453,15 +453,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_16
+      name: life
       rect:
         serializedVersion: 2
         x: 32
         y: 8
         width: 8
         height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.4142208, y: 1.4542954}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -469,27 +469,6 @@ TextureImporter:
       bones: []
       spriteID: 95871858a69378c4695dd12ac0f5911d
       internalID: 831259069
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spritesheet_17
-      rect:
-        serializedVersion: 2
-        x: 40
-        y: 0
-        width: 24
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 66662bb7c75c942498d81fee9ce862f0
-      internalID: 1931718414
       vertices: []
       indices: 
       edges: []
@@ -505,21 +484,21 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      spritesheet_0: -618779247
-      spritesheet_1: -1181750621
+      bigore: -1181750621
+      bigrock: -618779247
+      bullet: -2015544176
+      life: 831259069
+      midore: -1150953499
+      midrock: 1653636241
+      ship: -1823144179
+      smallore: -1518697870
+      smallrock: 366385160
       spritesheet_10: -1034865747
       spritesheet_11: 880313599
       spritesheet_12: -1426608154
       spritesheet_13: -1998651897
-      spritesheet_14: 2102555042
-      spritesheet_15: -1823144179
-      spritesheet_16: 831259069
       spritesheet_17: 1931718414
-      spritesheet_2: 1653636241
-      spritesheet_3: -1150953499
       spritesheet_4: -1335859568
-      spritesheet_5: -2098686999
-      spritesheet_6: -1683482319
       spritesheet_7: 1321908716
       spritesheet_8: 267977036
       spritesheet_9: -977648874

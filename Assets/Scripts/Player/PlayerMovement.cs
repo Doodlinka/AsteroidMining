@@ -4,18 +4,28 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float thrust = 1, rotationSpeed = 1, maxVelocity = 1;
     [SerializeField] private Vector3 bottomLeft, topRight;
+    [SerializeField] private AudioClip[] thrustSounds;
 
     private Vector2 movement;
     private Rigidbody2D rb2d;
+    private AudioSource audioSource;
 
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
     {
         movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        if (movement != Vector2.zero && !audioSource.isPlaying) {
+            audioSource.clip = thrustSounds[Random.Range(0, thrustSounds.Length)];
+            audioSource.Play();
+        }
+        else {
+            audioSource.Stop();
+        }
     }
 
     private void FixedUpdate() {
