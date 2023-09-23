@@ -30,7 +30,8 @@ public class PlayerShooting : MonoBehaviour
     }
 
     private void Grapple() {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, grappleRange, GRAPPLEMASK);
+        // RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, grappleRange, GRAPPLEMASK);
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, new(0.25f, 0.25f), 0, transform.up, grappleRange, GRAPPLEMASK);
         if (hit.rigidbody) {
             rb2d.AddForce(transform.up * grappleSpeed);
             hit.rigidbody.AddForce(-transform.up * grappleSpeed);

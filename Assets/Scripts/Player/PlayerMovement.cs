@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float thrust = 1, rotationSpeed = 1, maxVelocity = 1;
+    [SerializeField] private Vector3 bottomLeft, topRight;
 
     private Vector2 movement;
     private Rigidbody2D rb2d;
@@ -28,5 +29,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         rb2d.rotation -= movement.x * rotationSpeed * Time.fixedDeltaTime;
+
+        // restrict to the playable area
+        transform.position = Vector3.Min(Vector3.Max(transform.position, bottomLeft), topRight);
     }
 }
