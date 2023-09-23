@@ -130,10 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -7221321643839988886, guid: e23ee5785d01e894c8a429bc6a396dd6, type: 3}
-      propertyPath: rotationSpeed
-      value: 360
-      objectReference: {fileID: 0}
     - target: {fileID: 4546009716761118132, guid: e23ee5785d01e894c8a429bc6a396dd6, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -180,7 +176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4546009716761118133, guid: e23ee5785d01e894c8a429bc6a396dd6, type: 3}
       propertyPath: m_Name
-      value: PhysicsPlayer
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4546009716761118134, guid: e23ee5785d01e894c8a429bc6a396dd6, type: 3}
       propertyPath: m_AngularDrag
@@ -202,14 +198,14 @@ PrefabInstance:
       propertyPath: beamColor.r
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6622712274732575165, guid: e23ee5785d01e894c8a429bc6a396dd6, type: 3}
-      propertyPath: bulletImpulse
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 8911496195969575342, guid: e23ee5785d01e894c8a429bc6a396dd6, type: 3}
       propertyPath: hiText
       value: 
       objectReference: {fileID: 822809675}
+    - target: {fileID: 8911496195969575342, guid: e23ee5785d01e894c8a429bc6a396dd6, type: 3}
+      propertyPath: livesBar
+      value: 
+      objectReference: {fileID: 741890781}
     - target: {fileID: 8911496195969575342, guid: e23ee5785d01e894c8a429bc6a396dd6, type: 3}
       propertyPath: scoreText
       value: 
@@ -502,8 +498,8 @@ MonoBehaviour:
   _asteroidPrefab: {fileID: 3852995089981949331, guid: e5d0de356dcc3cb47a1c13b8878d99bd, type: 3}
   _spawnCooldownMin: 1
   _spawnCooldownMax: 2
-  _velocityMin: 4
-  _velocityMax: 8
+  _velocityMin: 2
+  _velocityMax: 4
   _spawnPosMargin: 3
   _oreChance: 0.25
 --- !u!1 &741890779
@@ -541,8 +537,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 16.5, y: -0.5}
-  m_SizeDelta: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 16, y: -0.5}
+  m_SizeDelta: {x: 3, y: 1}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &741890781
 MonoBehaviour:
@@ -617,7 +613,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 9.5, y: -0.5}
+  m_AnchoredPosition: {x: 9, y: -0.5}
   m_SizeDelta: {x: 6, y: 1}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &822809675
@@ -758,7 +754,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1695830313
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -896,19 +892,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 323817179401020348, guid: 206eb3d2aa15aff40a791c606fb1bf57, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0.36099046
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 323817179401020348, guid: 206eb3d2aa15aff40a791c606fb1bf57, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0.09436619
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 323817179401020348, guid: 206eb3d2aa15aff40a791c606fb1bf57, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.27801913
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 323817179401020348, guid: 206eb3d2aa15aff40a791c606fb1bf57, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 0.81126755
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 323817179401020350, guid: 206eb3d2aa15aff40a791c606fb1bf57, type: 3}
       propertyPath: m_Name

@@ -84,9 +84,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d512f8a331d04d46acb8fdcdbff9818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 24
+  thrust: 48
   rotationSpeed: 360
-  maxVelocity: 8
+  maxVelocity: 10
   bottomLeft: {x: -9, y: -8, z: 0}
   topRight: {x: 9, y: 8, z: 0}
   thrustSounds:
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3596262600655397399, guid: 2a25f7643811da245a04a37d1273c0cb, type: 3}
   shootPoint: {fileID: 1468660567}
-  bulletImpulse: 15
+  bulletImpulse: 2
   grappleRange: 12
   grappleSpeed: 12
 --- !u!114 &8911496195969575342
@@ -123,7 +123,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 0}
   hiText: {fileID: 0}
-  maxHealth: 6
+  livesBar: {fileID: 0}
+  maxLives: 3
+  iframes: 1
 --- !u!50 &4546009716761118134
 Rigidbody2D:
   serializedVersion: 4
@@ -137,7 +139,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 2
-  m_LinearDrag: 2
+  m_LinearDrag: 3
   m_AngularDrag: 0.5
   m_GravityScale: 0
   m_Material: {fileID: 0}

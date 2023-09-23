@@ -5,30 +5,50 @@ using UnityEngine.UI;
 public class PlayerStats : MonoBehaviour, IDamageable
 {
     [SerializeField] private Text scoreText, hiText;
-    [SerializeField] private int maxHealth = 6;
-    private int score, hi, health;
+    [SerializeField] private Image livesBar;
+    [SerializeField] private int maxLives = 3;
+    [SerializeField] private float iframes;
+    private float invTimer;
+    private int score, hi, lives;
 
     void Start() {
-        health = maxHealth;
+        lives = maxLives;
         if (PlayerPrefs.HasKey("HI")) {
             hi = PlayerPrefs.GetInt("HI");
         }
         hiText.text = "HI " + hi.ToString().PadLeft(3, '0');
+        Respawn();
+    }
+
+    void FixedUpdate() {
+        if (invTimer > 0) {
+            invTimer -= Time.fixedDeltaTime; 
+        } 
+    }
+
+    private void Respawn() {
+        // TODO: update lives ui
+        transform.position = Vector3.zero;
+        invTimer = iframes;
+        livesBar.fillAmount = (float)lives / maxLives;
     }
 
     public void TakeDamage(int damage = 1) {
-        health -= damage;
-        if (health <= 0) {
+        if (invTimer > 0) return;
+
+        lives -= 1;
+        if (lives <= 0) {
             Die();
         }
+        Respawn();
     }
 
     public void Die() {
-        // TODO: explosion animation
         if (score > hi) {
             PlayerPrefs.SetInt("HI", score);
             hiText.text = "HI " + score.ToString().PadLeft(3, '0');
         }
+        // TODO: explosion animation
         Destroy(gameObject);
     }
 
