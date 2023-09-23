@@ -99,6 +99,14 @@ public class Asteroid : MonoBehaviour, IDamageable
         }
     }
 
+    // die if out of bounds
+    private void OnTriggerExit2D(Collider2D other) {
+        // TODO: name check bad, replace with something else (what?)
+        if (other.gameObject.name == "RockArea") {
+            Vanish();
+        }
+    }
+
     // private void OnDisable() {
     //     // return to the pool if we keep it
     //     // Vanish()?
