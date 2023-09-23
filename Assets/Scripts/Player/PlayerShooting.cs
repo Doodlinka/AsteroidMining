@@ -8,7 +8,7 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform shootPoint;
     [SerializeField] private float bulletImpulse = 1, grappleRange = 10, grappleSpeed = 8;
-    [SerializeField] private Color beamColor;
+    // [SerializeField] private Color beamColor;
     private Rigidbody2D rb2d; 
 
 

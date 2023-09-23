@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: d7bd5c46748ebed4ea520a4cd573176d
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 8
+  forceTextureCase: -1
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - District Digital Outline
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: f4e68ba2c51786e42b8b78d39f5e7bba, type: 3}
+  customCharacters: 
+  fontRenderingMode: 2
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
