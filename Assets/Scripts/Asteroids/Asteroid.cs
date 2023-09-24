@@ -43,8 +43,7 @@ public class Asteroid : MonoBehaviour, IDamageable
     public event Action<AsteroidData> onSplit;
     // [HideInInspector]public bool SubscribedToEvent = false;
 
-    void 
-    Awake()
+    void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
@@ -81,6 +80,10 @@ public class Asteroid : MonoBehaviour, IDamageable
         transform.position = data.Position;
         rb2d.velocity = data.Velocity;
         HasOre = data.HasOre;
+        // bad hardcode but i don't care
+        rb2d.rotation = Random.Range(0f, 360f);
+        rb2d.angularVelocity = Random.Range(-10f, 10f);
+        // rb2d.AddForce(Random.insideUnitSphere * 3, ForceMode2D.Impulse);
     }
 
     private void SetSprite() {

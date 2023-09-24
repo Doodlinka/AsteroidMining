@@ -46,6 +46,7 @@ public class AsteroidSpawner : MonoBehaviour
         // when an ore rock splits, the first piece is guaranteed to have ore
         // and handles it itself, the second one is twice as likely as the spawn ore chance
         data.HasOre &= Random.value <= 2 * _oreChance;
+        data.Velocity *= Random.insideUnitCircle.normalized;
         MakeAsteroid(data);
     }
 
