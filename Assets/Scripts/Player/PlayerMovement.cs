@@ -4,7 +4,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float thrust = 1, rotationSpeed = 1, maxVelocity = 1;
     [SerializeField] private Vector3 bottomLeft, topRight;
-    [SerializeField] private AudioClip[] thrustSounds;
+    // [SerializeField] private AudioClip[] thrustSounds;
 
     private Vector2 movement;
     private Rigidbody2D rb2d;

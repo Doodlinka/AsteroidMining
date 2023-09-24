@@ -8,6 +8,7 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform shootPoint;
     [SerializeField] private float bulletImpulse = 1, grappleRange = 10, grappleSpeed = 8;
+    [SerializeField] private Transform beamView;
     // [SerializeField] private Color beamColor;
     private Rigidbody2D rb2d; 
 
@@ -20,6 +21,8 @@ public class PlayerShooting : MonoBehaviour
     {
         if (Input.GetButtonDown("A")) Shoot();
         if (Input.GetButton("B")) Grapple();
+        if (Input.GetButtonDown("B")) beamView.gameObject.SetActive(true);
+        if (Input.GetButtonUp("B")) beamView.gameObject.SetActive(false);
     }
 
     private void Shoot()
@@ -35,12 +38,26 @@ public class PlayerShooting : MonoBehaviour
         if (hit.rigidbody) {
             rb2d.AddForce(transform.up * grappleSpeed);
             hit.rigidbody.AddForce(-transform.up * grappleSpeed);
+            SetBeamView(hit.point, 0.25f);
+            // rb2d.velocity = Vector2.ClampMagnitude(rb2d.velocity, grappleSpeed);
+            // hit.rigidbody.velocity = Vector2.ClampMagnitude(hit.rigidbody.velocity, grappleSpeed);
+            // rb2d.velocity = transform.up * grappleSpeed / rb2d.mass;
+            // hit.rigidbody.velocity = -transform.up * grappleSpeed / hit.rigidbody.mass;
+        }
+        else {
+            SetBeamView(transform.position + transform.up * grappleRange, 0.0625f);
         }
     }
 
-    // private Quaternion CalculateRotation() 
+    private void SetBeamView(Vector3 target, float width) {
+        beamView.position = (shootPoint.position + target) / 2;
+        beamView.rotation.SetFromToRotation(shootPoint.position, target);
+        beamView.localScale = new(width, (target - shootPoint.position).magnitude, 0);
+    }
+
+    // private Quaternion RotationBetween(Vector2 a, Vector2 b) 
     // {
-    //     var rotationAngle = Mathf.Atan2(transform.up.y, transform.up.x) * Mathf.Rad2Deg;
+    //     var rotationAngle = Mathf.Atan2(b.y - a.y, b.x - a.x) * Mathf.Rad2Deg;
     //     return Quaternion.Euler(0, 0, rotationAngle);
     // }
 }

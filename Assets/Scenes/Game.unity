@@ -194,6 +194,10 @@ PrefabInstance:
       propertyPath: beamColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6622712274732575165, guid: e23ee5785d01e894c8a429bc6a396dd6, type: 3}
+      propertyPath: grappleSpeed
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 8911496195969575342, guid: e23ee5785d01e894c8a429bc6a396dd6, type: 3}
       propertyPath: hiText
       value: 
