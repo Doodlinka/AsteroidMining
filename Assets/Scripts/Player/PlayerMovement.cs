@@ -8,24 +8,24 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 movement;
     private Rigidbody2D rb2d;
-    private AudioSource audioSource;
+    // private AudioSource audioSource;
 
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        audioSource = GetComponent<AudioSource>();
+        // audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
     {
         movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        if (movement != Vector2.zero && !audioSource.isPlaying) {
-            audioSource.clip = thrustSounds[Random.Range(0, thrustSounds.Length)];
-            audioSource.Play();
-        }
-        else {
-            audioSource.Stop();
-        }
+        // if (movement != Vector2.zero && !audioSource.isPlaying) {
+        //     audioSource.clip = thrustSounds[Random.Range(0, thrustSounds.Length)];
+        //     audioSource.Play();
+        // }
+        // else {
+        //     audioSource.Stop();
+        // }
     }
 
     private void FixedUpdate() {

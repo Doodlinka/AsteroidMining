@@ -179,10 +179,6 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4546009716761118134, guid: e23ee5785d01e894c8a429bc6a396dd6, type: 3}
-      propertyPath: m_AngularDrag
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4546009716761118134, guid: e23ee5785d01e894c8a429bc6a396dd6, type: 3}
       propertyPath: m_Constraints
       value: 4
       objectReference: {fileID: 0}
@@ -210,7 +206,8 @@ PrefabInstance:
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 1467518075}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4316503921215021767, guid: e23ee5785d01e894c8a429bc6a396dd6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e23ee5785d01e894c8a429bc6a396dd6, type: 3}
 --- !u!1 &268384193
 GameObject:
@@ -754,7 +751,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1695830313
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -927,7 +924,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9ba7f71daf1c9e94caa01714077e2f14, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d6077ae7ca9b31849a467120a189a50d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
