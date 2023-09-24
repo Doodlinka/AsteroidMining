@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     // [SerializeField] private AudioClip[] thrustSounds;
 
     private Vector2 movement;
+    // private bool wasMoving;
     private Rigidbody2D rb2d;
     // private AudioSource audioSource;
 
@@ -19,13 +20,14 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        // if (movement != Vector2.zero && !audioSource.isPlaying) {
+        // if (movement.sqrMagnitude > 0.01f && !wasMoving) {
         //     audioSource.clip = thrustSounds[Random.Range(0, thrustSounds.Length)];
         //     audioSource.Play();
         // }
-        // else {
+        // else if (movement.sqrMagnitude <= 0.01f && wasMoving) {
         //     audioSource.Stop();
         // }
+        // wasMoving = movement.sqrMagnitude <= 0.01f;
     }
 
     private void FixedUpdate() {

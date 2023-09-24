@@ -107,6 +107,10 @@ MonoBehaviour:
   - {fileID: -1518697870, guid: f6d7cc84b49719546bc370c44340d37a, type: 3}
   - {fileID: -1150953499, guid: f6d7cc84b49719546bc370c44340d37a, type: 3}
   - {fileID: -1181750621, guid: f6d7cc84b49719546bc370c44340d37a, type: 3}
+  boomSounds:
+  - {fileID: 8300000, guid: fa54dd0bec708864c9314442cee54a73, type: 3}
+  - {fileID: 8300000, guid: e353e0cb90a8d024bb2c4b368466c9ed, type: 3}
+  - {fileID: 8300000, guid: 2bd480de64deb0f4aa9209a1ffb875ca, type: 3}
 --- !u!50 &3852995089981949343
 Rigidbody2D:
   serializedVersion: 4

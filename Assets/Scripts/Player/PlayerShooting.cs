@@ -9,20 +9,33 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] private Transform shootPoint;
     [SerializeField] private float bulletImpulse = 1, grappleRange = 10, grappleSpeed = 8;
     [SerializeField] private Transform beamView;
-    // [SerializeField] private Color beamColor;
+    [SerializeField] private AudioClip[] shootSounds;
+    [SerializeField] private AudioClip grappleSound;
+    private AudioSource audioSource;
     private Rigidbody2D rb2d; 
 
 
     private void Awake() {
         rb2d = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("A")) Shoot();
+        if (Input.GetButtonDown("A")) {
+            Shoot();
+            audioSource.PlayOneShot(shootSounds[Random.Range(0, shootSounds.Length)]);
+        }
         if (Input.GetButton("B")) Grapple();
-        if (Input.GetButtonDown("B")) beamView.gameObject.SetActive(true);
-        if (Input.GetButtonUp("B")) beamView.gameObject.SetActive(false);
+        if (Input.GetButtonDown("B")) {
+            audioSource.clip = grappleSound;
+            audioSource.Play();
+            beamView.gameObject.SetActive(true);
+        }
+        if (Input.GetButtonUp("B")) {
+            beamView.gameObject.SetActive(false);
+            audioSource.Stop();
+        }
     }
 
     private void Shoot()

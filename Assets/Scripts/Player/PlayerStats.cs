@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+// using UnityEngine.SceneManagement;
+// using System.Collections;
 
 // TODO: put the score elsewhere or rename the script
 public class PlayerStats : MonoBehaviour, IDamageable
@@ -8,10 +10,13 @@ public class PlayerStats : MonoBehaviour, IDamageable
     [SerializeField] private Image livesBar;
     [SerializeField] private int maxLives = 3;
     [SerializeField] private float iframes;
+    [SerializeField] private AudioClip[] hurtSounds;//, boomSounds;
+    private AudioSource audioSource;
     private float invTimer;
     private int score, hi, lives;
 
     void Start() {
+        audioSource = GetComponent<AudioSource>();
         lives = maxLives;
         if (PlayerPrefs.HasKey("HI")) {
             hi = PlayerPrefs.GetInt("HI");
@@ -28,7 +33,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     private void Respawn() {
         // TODO: update lives ui
-        transform.position = Vector3.zero;
+        // transform.position = Vector3.zero;
         invTimer = iframes;
         livesBar.fillAmount = (float)lives / maxLives;
     }
@@ -41,6 +46,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
             Die();
         }
         Respawn();
+        audioSource.PlayOneShot(hurtSounds[Random.Range(0, hurtSounds.Length)]);
     }
 
     public void Die() {
@@ -50,7 +56,15 @@ public class PlayerStats : MonoBehaviour, IDamageable
         }
         // TODO: explosion animation
         Destroy(gameObject);
+        // AudioSource.PlayClipAtPoint(boomSounds[Random.Range(0, boomSounds.Length)], transform.position, 1.2f);
+        // StartCoroutine("ReloadScene");
     }
+
+    // private IEnumerator ReloadScene() {
+    //     yield return new WaitForSeconds(3);
+    //     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    //     yield break;
+    // }
 
     void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.TryGetComponent<IDamageable>(out IDamageable d)) {

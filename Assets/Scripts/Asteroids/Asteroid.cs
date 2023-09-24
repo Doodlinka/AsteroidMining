@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 public class Asteroid : MonoBehaviour, IDamageable
 {
     [SerializeField] private Sprite[] sprites, oreSprites;
+    // [SerializeField] private AudioClip[] boomSounds;
 
     private Rigidbody2D rb2d;
     private SpriteRenderer sr;
@@ -66,6 +67,7 @@ public class Asteroid : MonoBehaviour, IDamageable
         else {
             Vanish();
         }
+        // AudioSource.PlayClipAtPoint(boomSounds[Random.Range(0, boomSounds.Length)], transform.position, 1.2f);
     }
 
     // used to silently despawn
